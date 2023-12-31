@@ -15,7 +15,7 @@ export const ThemeSwitcher = () => {
 
   return (
     <div className="absolute bottom-0 right-0 p-5">
-      {theme === "dark" && (
+      {(theme === "dark" || theme === "system") && (
         <Button
           className="rounded-full p-2"
           variant={"outline"}
