@@ -1,7 +1,7 @@
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import React from "react";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative h-screen gap-2 flex">
       <Sidebar />
@@ -10,4 +10,4 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default DashboardLayout;
+export default AdminLayout;

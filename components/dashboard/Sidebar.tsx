@@ -25,12 +25,12 @@ export const Sidebar = () => {
       <ArrowRight
         onClick={() => setOpen(!open)}
         className={cn(
-          "w-8 h-8 cursor-pointer border-muted-foreground border rounded-full p-2 absolute -right-3 top-9 bg-white",
+          "w-8 h-8 cursor-pointer border-muted-foreground border rounded-full p-2 absolute -right-3 top-9 bg-white text-black",
           open && "rotate-180"
         )}
       />
       <div className="inline-flex">
-        <MapPin className="bg-white block float-left mr-2 cursor-pointer w-8 h-8 rounded" />
+        <MapPin className="text-white dark:text-black block float-left mr-2 cursor-pointer w-8 h-8 rounded" />
         <h1
           className={cn(
             "text-white dark:text-black text-2xl origin-left font-medium duration-300",
