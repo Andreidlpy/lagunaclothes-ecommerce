@@ -16,10 +16,10 @@ import { useState } from "react";
 // import { ProductColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { Payment } from "./columns";
+import { Order } from "./columns";
 
 interface CellActionProps {
-  data: Payment;
+  data: Order;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {

@@ -11,15 +11,11 @@ export const ProductClient = () => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title="Products"
-          description="Manage products for your store"
+          title="Orders"
+          description="Manage yout orders for your store"
         />
-        <Button>
-          <PlusIcon className="h-4 w-4 mr-2" />
-          Add New
-        </Button>
       </div>
-      <DataTable columns={columns} data={payments} searchKey="status" />
+      <DataTable columns={columns} data={payments} searchKey="user" />
     </>
   );
 };

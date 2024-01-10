@@ -1,13 +1,7 @@
-import { ProductClient } from "./_components/client";
+import React from "react";
 
 const ProductsPage = () => {
-  return (
-    <div className="flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <ProductClient />
-      </div>
-    </div>
-  );
+  return <div>ProductPage</div>;
 };
 
 export default ProductsPage;
