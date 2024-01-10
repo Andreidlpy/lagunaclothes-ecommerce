@@ -43,11 +43,11 @@ export const Sidebar = () => {
       <ul className="pt-2">
         {Menus.map((menu, index) => (
           <Link
-            href={`/lg-admin/${menu.title}`}
+            href={`/admin/${menu.title}`}
             key={index}
             className={cn(
               "text-white dark:text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white/70 hover:text-black transition duration-300 rounded-md mt-2",
-              pathname === `/lg-admin/${menu.title}` && "bg-white/70"
+              pathname === `/admin/${menu.title}` && "bg-white/70"
             )}
           >
             <span className="float-left block">{menu.icon}</span>
