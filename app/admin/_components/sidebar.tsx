@@ -1,14 +1,20 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ArrowRight, Box, LayoutDashboard, MapPin } from "lucide-react";
+
+import { PiBag, PiMapPin } from "react-icons/pi";
+import { AiOutlineDashboard } from "react-icons/ai";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { CiBoxes } from "react-icons/ci";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const Menus = [
-  { title: "dashboard", icon: <LayoutDashboard /> },
-  { title: "products", icon: <Box /> },
+  { title: "dashboard", icon: <AiOutlineDashboard /> },
+  { title: "products", icon: <CiBoxes /> },
+  { title: "orders", icon: <PiBag /> },
 ];
 
 export const Sidebar = () => {
@@ -18,11 +24,11 @@ export const Sidebar = () => {
   return (
     <aside
       className={cn(
-        "bg-black w-20 transition-all relative dark:bg-white p-5 pt-8 h-screen",
-        open ? "w-72" : "w-20"
+        "bg-black w-20 transition-all relative dark:bg-white p-5 pt-8",
+        open ? "w-52" : "w-20"
       )}
     >
-      <ArrowRight
+      <MdOutlineArrowRightAlt
         onClick={() => setOpen(!open)}
         className={cn(
           "w-8 h-8 cursor-pointer border-muted-foreground border rounded-full p-2 absolute -right-3 top-9 bg-white",
@@ -30,7 +36,7 @@ export const Sidebar = () => {
         )}
       />
       <div className="inline-flex">
-        <MapPin className="bg-white block float-left mr-2 cursor-pointer w-8 h-8 rounded" />
+        <PiMapPin className="bg-white block float-left mr-2 cursor-pointer w-8 h-8 rounded" />
         <h1
           className={cn(
             "text-white dark:text-black text-2xl origin-left font-medium duration-300",
@@ -46,14 +52,14 @@ export const Sidebar = () => {
             href={`/admin/${menu.title}`}
             key={index}
             className={cn(
-              "text-white dark:text-black text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white/70 hover:text-black transition duration-300 rounded-md mt-2",
-              pathname === `/admin/${menu.title}` && "bg-white/70"
+              "text-black  text-sm flex items-center gap-x-4 cursor-pointer p-2 dark:bg-opacity-80 hover:bg-white/20 dark:text-white transition duration-300 rounded-md mt-2",
+              pathname === `/admin/${menu.title}` && "bg-blue-600"
             )}
           >
             <span className="float-left block">{menu.icon}</span>
             <span
               className={cn(
-                "font-medium text-base flex-1 capitalize",
+                "font-light text-sm flex-1 capitalize",
                 !open && "hidden"
               )}
             >
