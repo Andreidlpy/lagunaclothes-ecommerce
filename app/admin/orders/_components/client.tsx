@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
-import { PlusIcon } from "lucide-react";
 import React from "react";
 import { columns } from "./columns";
 import { payments } from "./data";
@@ -15,7 +13,9 @@ export const ProductClient = () => {
           description="Manage yout orders for your store"
         />
       </div>
-      <DataTable columns={columns} data={payments} searchKey="user" />
+      <div className="w-96 min-w-full">
+        <DataTable columns={columns} data={payments} searchKey="user" />
+      </div>
     </>
   );
 };

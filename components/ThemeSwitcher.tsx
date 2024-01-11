@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { Button } from "./ui/button";
-import { Monitor, Moon, SunMoon } from "lucide-react";
-import { FaDesktop } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { RxMoon } from "react-icons/rx";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
+import { cn } from "@/lib/utils";
 
 export const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  const themes = ["light", "dark", "system"];
 
   useEffect(() => {
     setMounted(true);
@@ -15,27 +24,32 @@ export const ThemeSwitcher = () => {
   if (!mounted) return null;
 
   return (
-    <div className="absolute bottom-0 right-0 p-5">
-      {theme === "dark" && (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
         <Button
-          className="rounded-full p-2"
-          variant={"outline"}
-          value={"dark"}
-          onClick={() => setTheme("light")}
+          variant="outline"
+          className="focus-visible:ring-0 px-2 focus-visible:ring-offset-0 border-none"
         >
-          <Moon />
+          <RxMoon className="size-5" />
         </Button>
-      )}
-      {theme === "light" && (
-        <Button
-          className="rounded-full p-2"
-          variant={"outline"}
-          value={"light"}
-          onClick={() => setTheme("dark")}
-        >
-          <SunMoon />
-        </Button>
-      )}
-    </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        className="w-32 p-1 border rounded-md z-50 opacity-100 bg-background"
+        collisionPadding={20}
+      >
+        <DropdownMenuSeparator />
+        {themes.map((them) => (
+          <DropdownMenuItem
+            key={them}
+            className={cn(
+              "outline-none px-2 py-1.5 dark:hover:bg-white/10 text-sm capitalize"
+            )}
+            onClick={() => setTheme(them)}
+          >
+            {them}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
