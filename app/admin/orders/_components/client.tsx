@@ -4,7 +4,7 @@ import React from "react";
 import { columns } from "./columns";
 import { payments } from "./data";
 
-export const ProductClient = () => {
+export const OrderClient = () => {
   return (
     <>
       <div className="flex items-center justify-between">

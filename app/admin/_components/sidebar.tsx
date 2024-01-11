@@ -21,5 +21,5 @@ export const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  return <div className="bg-teal-400 w-52 hidden md:block">Sidebar</div>;
+  return <div className="bg-teal-400 w-[200px] hidden md:block">Sidebar</div>;
 };
