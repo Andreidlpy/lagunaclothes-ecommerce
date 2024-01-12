@@ -40,14 +40,15 @@ export const Drawer = ({
 
   return (
     <Sheet>
-      <SheetTrigger className="cursor-pointer">
-        {isButton && (
-          <Button className="bg-blue-500 text-white font-light">
+      <SheetTrigger asChild className="cursor-pointer">
+        {isButton ? (
+          <Button className="font-light text-sm py-0" size={"sm"}>
             <Plus className="size-4 mr-2" />
             {textButton}
           </Button>
+        ) : (
+          <Menu />
         )}
-        {!isButton && <Menu />}
       </SheetTrigger>
       <SheetContent side={side} className="w-[200px] max-w-full">
         <SheetHeader>

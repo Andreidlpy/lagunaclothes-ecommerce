@@ -1,12 +1,14 @@
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import { AsideDrawer } from "@/components/modals/aside-modal";
+import { SidebarDrawer } from "@/components/drawers/sidebar-drawer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 
 export const Header = () => {
   return (
     <div className="h-20 p-5 flex justify-between items-center">
-      <AsideDrawer />
+      <div className="flex-grow">
+        <SidebarDrawer />
+      </div>
       <div className="flex items-center">
         <ThemeSwitcher />
         <span className="text-sm mx-2">Juan Perez</span>
