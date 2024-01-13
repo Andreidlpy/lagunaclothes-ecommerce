@@ -29,7 +29,7 @@ export const SidebarDrawer = () => {
           <Menu className="size-4" />
         </Button>
       </SheetTrigger>
-      <SheetContent side={"left"} className="w-[200px] max-w-full">
+      <SheetContent side={"right"} className="w-[200px] max-w-full">
         <SheetHeader>
           <SheetTitle>KHYO</SheetTitle>
         </SheetHeader>

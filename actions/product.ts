@@ -1,16 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-
-type Product = {
-  description: string;
-  hasVariant?: boolean;
-  name: string;
-  normalPrice: number;
-  newPrice?: number;
-  active: boolean;
-  categoryId: string;
-};
+import { Product } from "@prisma/client";
 
 export const register = async (data: Product) => {
   const {
@@ -23,6 +14,15 @@ export const register = async (data: Product) => {
     active,
   } = data;
 
+  const existingProduct = await db.product.findFirst({
+    where: {
+      name,
+    },
+  });
+
+  if (existingProduct) {
+    return { error: "Producto ya existe" };
+  }
   const product = await db.product.create({
     data: {
       categoryId,
