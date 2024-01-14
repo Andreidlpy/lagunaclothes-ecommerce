@@ -1,27 +1,16 @@
 import { Heading } from "@/components/ui/heading";
 import React from "react";
 import { ListProducts } from "./products-list";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { ProductsFilter } from "./products-filter";
-import { AsideDrawer } from "@/components/modals/aside-modal";
-import { Drawer } from "@/components/ui/drawer";
-import { Separator } from "@/components/ui/separator";
+import { FormDrawer } from "./form-drawer";
 
 export const ProductClient = () => {
   return (
     <div className="flex gap-3">
-      <div className="flex-grow max-w-full sm:max-w-[75%]">
-        <div className="flex justify-between items-center pb-5 min-w-full">
-          <Heading title="Products" description="Manage your products here" />
-          <Drawer
-            isButton
-            textButton="Añadir Producto"
-            title="Añadir Producto"
-            side="right"
-          >
-            <Separator />
-          </Drawer>
+      <div className="flex-grow max-w-full sm:min-w-[75%] mx-auto">
+        <div className="flex flex-col items-start gap-2 sm:items-center sm:flex-row sm:justify-between pb-5">
+          <Heading title="Productos" description="Manage your products here" />
+          <FormDrawer />
         </div>
         <ListProducts />
       </div>

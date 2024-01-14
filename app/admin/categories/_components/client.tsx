@@ -14,14 +14,14 @@ export const CategoryClient = async () => {
   }));
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-start sm:flex-row sm:justify-between space-y-4 sm:space-y-0">
         <Heading
           title="Categorias"
           description="Manage yout categories for your store"
         />
-        <AddDrawer />
+        {/* <AddDrawer /> */}
       </div>
-      <div className="w-96 min-w-full">
+      <div>
         <DataTable
           columns={columns}
           data={formattedCategories}

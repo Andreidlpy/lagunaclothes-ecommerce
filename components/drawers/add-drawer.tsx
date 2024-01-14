@@ -17,6 +17,7 @@ type AddDrawer = {
   textButton: string;
   isOpen: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  icon?: React.ReactElement;
 };
 
 export const AddDrawer = ({
@@ -25,6 +26,7 @@ export const AddDrawer = ({
   textButton,
   setOpen,
   isOpen,
+  icon,
 }: AddDrawer) => {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -39,9 +41,12 @@ export const AddDrawer = ({
   return (
     <Sheet open={isOpen} onOpenChange={() => setOpen(!isOpen)}>
       <SheetTrigger asChild className="cursor-pointer">
-        <Button size={"sm"}>{textButton}</Button>
+        <Button size={"sm"} className="text-sm py-0 font-light">
+          {icon}
+          {textButton}
+        </Button>
       </SheetTrigger>
-      <SheetContent side={"right"}>
+      <SheetContent side={"right"} className="w-full overflow-auto">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
         </SheetHeader>

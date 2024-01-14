@@ -7,34 +7,47 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Copy, Edit, MoreHorizontal, SquareStack, Trash } from "lucide-react";
-// import toast from "react-hot-toast";
-import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
-// import { AlertModal } from "@/components/modals/alert-modal";
 
-// import { ProductColumn } from "./columns";
+import { Copy, MoreHorizontal, Trash } from "lucide-react";
+import { useState, useTransition } from "react";
+
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { Category } from "./columns";
+import { deleteCategory } from "@/actions/category";
+import { toast } from "sonner";
 
 interface CellActionProps {
   data: Category;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
-  const router = useRouter();
-  const params = useParams();
-
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
+    toast.success("Id copiado!");
   };
 
   const onDelete = async () => {
-    console.log("delete");
+    startTransition(() => {
+      deleteCategory(data.id)
+        .then((data) => {
+          if (data?.success) {
+            toast.success(data?.success);
+          }
+          if (data?.error) {
+            toast.error(data?.error);
+          }
+        })
+        .catch(() => {
+          toast.error("Something went wrong!");
+        })
+        .finally(() => {
+          setOpen(false);
+        });
+    });
   };
 
   return (
@@ -42,7 +55,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        loading={loading}
+        loading={isPending}
         onConfirm={onDelete}
       />
       <DropdownMenu>
@@ -54,29 +67,13 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          {/* <DropdownMenuItem onClick={() => onCopy(data.id)}>
+          <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Copy className="mr-2 h-4 w-4" />
-            Copy Id
+            Copiar Id
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() =>
-              router.push(`/${params.storeId}/products/${data.id}`)
-            }
-          >
-            <Edit className="mr-2 h-4 w-4" />
-            Update
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() =>
-              router.push(`/${params.storeId}/products/${data.id}/variations`)
-            }
-          >
-            <SquareStack className="mr-2 h-4 w-4" />
-            Variaciones
-          </DropdownMenuItem> */}
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" />
-            Delete
+            Borrar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

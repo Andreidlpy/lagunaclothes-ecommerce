@@ -18,7 +18,7 @@ export const columns: ColumnDef<Category>[] = [
   {
     accessorKey: "id",
     header: "Id",
-    cell: ({ row }) => <p className="truncate ">{row.original.id}</p>,
+    cell: ({ row }) => <p className="truncate w-14">{row.original.id}</p>,
   },
   {
     accessorKey: "name",
@@ -76,7 +76,10 @@ export const columns: ColumnDef<Category>[] = [
               autoFocus // autoFocus to focus the input when it appears
             />
           ) : (
-            <p className="w-32 max-w-full" onClick={startEditing}>
+            <p
+              className="w-32 max-w-full cursor-pointer hover:text-blue-500/70 hover:underline transition"
+              onClick={startEditing}
+            >
               {categoryName}
             </p>
           )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { AddDrawer as Drawer } from "@/components/drawers/add-drawer";
 
 import {
@@ -21,10 +21,13 @@ import { Button } from "@/components/ui/button";
 import { categorySchema } from "@/schemas";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
+import { FormError } from "@/components/auth/form-error";
+import { Plus } from "lucide-react";
 
 export const AddDrawer = () => {
   const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const form = useForm<z.infer<typeof categorySchema>>({
     resolver: zodResolver(categorySchema),
@@ -34,11 +37,12 @@ export const AddDrawer = () => {
   });
 
   const onSubmit = (values: z.infer<typeof categorySchema>) => {
+    setError("");
     startTransition(() => {
       register(values)
         .then((data) => {
           if (data?.error) {
-            toast.error(data.error);
+            setError(data?.error);
           }
           if (data?.success) {
             setOpen(false);
@@ -49,11 +53,18 @@ export const AddDrawer = () => {
         .catch(() => toast.error("Something went wrong!"));
     });
   };
+
+  useEffect(() => {
+    setError("");
+    form.reset();
+  }, [open]);
+
   return (
     <Drawer
       setOpen={setOpen}
       isOpen={open}
       textButton="Añadir Categoria"
+      icon={<Plus className="mr-2 size-4" />}
       title="Categorias"
     >
       <Separator className="my-4" />
@@ -76,6 +87,7 @@ export const AddDrawer = () => {
                 </FormItem>
               )}
             />
+            <FormError message={error} />
           </div>
           <Button disabled={isPending} type="submit" className="w-full">
             Save

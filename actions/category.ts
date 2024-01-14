@@ -4,6 +4,7 @@ import * as z from "zod";
 
 import { db } from "@/lib/db";
 import { categorySchema } from "@/schemas";
+import { revalidatePath } from "next/cache";
 
 export const register = async (values: z.infer<typeof categorySchema>) => {
   const validatedFields = categorySchema.safeParse(values);
@@ -29,8 +30,11 @@ export const register = async (values: z.infer<typeof categorySchema>) => {
     },
   });
 
+  revalidatePath("/admin/categories");
+
   return { success: "Categoria creada!" };
 };
+
 export const getCategories = async () => {
   const categories = await db.category.findMany();
 
@@ -79,4 +83,26 @@ export const editCategory = async (
   });
 
   return { success: "Categoria actualizada!" };
+};
+
+export const deleteCategory = async (id: string) => {
+  const existingCategory = await db.category.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!existingCategory) return { error: "La categoria no existe!" };
+
+  await db.category.delete({
+    where: {
+      id,
+    },
+  });
+
+  revalidatePath("/admin/categories");
+
+  return {
+    success: "Categoría borrada!",
+  };
 };

@@ -6,7 +6,7 @@ import { Header } from "./_components/header";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative min-h-screen flex">
+    <div className="relative min-h-screen flex flex-col sm:flex-row">
       <Sidebar />
       <div className="flex-grow flex flex-col">
         <Header />
